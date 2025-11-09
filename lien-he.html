@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liên Hệ - Cháo Baby Cutie</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/lien-he.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-baby"></i>
+                    <span>Cháo Baby Cutie</span>
+                </div>
+                <nav class="nav">
+                    <a href="index.html">Trang Chủ</a>
+                    <a href="gioi-thieu.html">Giới Thiệu</a>
+                    <a href="thuc-don.html">Thực Đơn</a>
+                    <a href="tin-tuc.html">Tin Tức</a>
+                    <a href="lien-he.html" class="active">Liên Hệ</a>
+                </nav>
+                <div class="header-actions">
+                    <button class="btn-icon" id="cartBtn">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </button>
+                    <button class="btn-login" id="loginBtn">Đăng Nhập</button>
+                    <button class="btn-register" id="registerBtn">Đăng Ký</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Title -->
+    <section class="page-title">
+        <div class="container">
+            <h1>Liên Hệ Với Chúng Tôi</h1>
+            <p>Chúng tôi luôn sẵn sàng lắng nghe và hỗ trợ bạn</p>
+        </div>
+    </section>
+
+    <!-- Contact Info -->
+    <section class="contact-info">
+        <div class="container">
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Địa Chỉ</h3>
+                    <p>Điện Biên Tây<br>Giao Hòa - Ninh Bình</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h3>Điện Thoại</h3>
+                    <p>Hotline: 0378.630.848<br>Hỗ trợ: 0984.868.340</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email</h3>
+                    <p>info@babycutie.vn<br>support@babycutie.vn</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Giờ Làm Việc</h3>
+                    <p>Thứ 2 - Thứ 7: 8:00 - 20:00<br>Chủ Nhật: 8:00 - 17:00</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="contact-form-section">
+        <div class="container">
+            <div class="contact-wrapper">
+                <div class="form-container">
+                    <h2>Gửi Tin Nhắn Cho Chúng Tôi</h2>
+                    <p class="form-subtitle">Điền thông tin vào form dưới đây, chúng tôi sẽ phản hồi trong vòng 24h</p>
+                    
+                    <form id="contactForm" class="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><i class="fas fa-user"></i> Họ và tên *</label>
+                                <input type="text" name="name" placeholder="Nhập họ và tên" required>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-envelope"></i> Email *</label>
+                                <input type="email" name="email" placeholder="Nhập email" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><i class="fas fa-phone"></i> Số điện thoại *</label>
+                                <input type="tel" name="phone" placeholder="Nhập số điện thoại" required>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-tag"></i> Chủ đề</label>
+                                <select name="subject">
+                                    <option value="general">Thắc mắc chung</option>
+                                    <option value="order">Đặt hàng</option>
+                                    <option value="product">Sản phẩm</option>
+                                    <option value="complaint">Khiếu nại</option>
+                                    <option value="partnership">Hợp tác</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label><i class="fas fa-comment"></i> Nội dung *</label>
+                            <textarea name="message" rows="6" placeholder="Nhập nội dung tin nhắn..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-submit">
+                            <i class="fas fa-paper-plane"></i> Gửi Tin Nhắn
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="contact-image">
+                    <div class="image-placeholder">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div class="social-links">
+                        <h3>Kết Nối Với Chúng Tôi</h3>
+                        <div class="social-icons">
+                            <a href="#" class="social-icon facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-icon instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="social-icon youtube">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                            <a href="#" class="social-icon zalo">
+                                <i class="fas fa-phone"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map -->
+    <section class="map-section">
+        <div class="container">
+            <h2 class="section-title">Vị Trí Của Chúng Tôi</h2>
+            <div class="map-container">
+                <div class="map-placeholder">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <p>Giao Hòa - Ninh Bình</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title">Câu Hỏi Thường Gặp</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-question-circle"></i>
+                        <span>Làm sao để đặt hàng?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Bạn có thể đặt hàng trực tiếp trên website, qua hotline hoặc các ứng dụng giao hàng. 
+                        Chúng tôi sẽ giao hàng tận nơi trong vòng 60 phút.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-question-circle"></i>
+                        <span>Sản phẩm có an toàn không?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Tất cả sản phẩm của chúng tôi đều được chế biến từ nguyên liệu tươi ngon, 
+                        đạt chuẩn ATTP và được giám sát bởi chuyên gia dinh dưỡng.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-question-circle"></i>
+                        <span>Thời gian giao hàng?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Chúng tôi cam kết giao hàng trong vòng 60 phút cho khu vực nội thành. 
+                        Với các khu vực xa, thời gian giao hàng từ 2-4 giờ.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-question-circle"></i>
+                        <span>Có thể đổi trả hàng không?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Chúng tôi hỗ trợ đổi trả hàng trong trường hợp sản phẩm có vấn đề về chất lượng. 
+                        Vui lòng liên hệ hotline trong vòng 2 giờ sau khi nhận hàng.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>Cháo Baby Cutie</h4>
+                    <p>Dinh dưỡng tốt nhất cho bé yêu của bạn</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Liên Kết</h4>
+                    <a href="index.html">Trang Chủ</a>
+                    <a href="gioi-thieu.html">Giới Thiệu</a>
+                    <a href="thuc-don.html">Thực Đơn</a>
+                    <a href="tin-tuc.html">Tin Tức</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Liên Hệ</h4>
+                    <p><i class="fas fa-phone"></i> 0378.630.848</p>
+                    <p><i class="fas fa-envelope"></i> info@babycutie.vn</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Giao Hòa - Ninh Bình</p>
+                </div>
+            </div>
+        </div>
+        
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/lien-he.js"></script>
+</body>
+</html>

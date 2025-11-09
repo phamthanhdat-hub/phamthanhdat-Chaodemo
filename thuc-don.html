@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thực Đơn - Cháo Baby Cutie</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/thuc-don.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-baby"></i>
+                    <span>Cháo Baby Cutie</span>
+                </div>
+                <nav class="nav">
+                    <a href="index.html">Trang Chủ</a>
+                    <a href="gioi-thieu.html">Giới Thiệu</a>
+                    <a href="thuc-don.html" class="active">Thực Đơn</a>
+                    <a href="tin-tuc.html">Tin Tức</a>
+                    <a href="lien-he.html">Liên Hệ</a>
+                </nav>
+                <div class="header-actions">
+                    <button class="btn-icon" id="cartBtn">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </button>
+                    <button class="btn-login" id="loginBtn">Đăng Nhập</button>
+                    <button class="btn-register" id="registerBtn">Đăng Ký</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Title -->
+    <section class="page-title">
+        <div class="container">
+            <h1>Thực Đơn Dinh Dưỡng</h1>
+            <p>Chọn món ăn phù hợp cho bé yêu</p>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="container">
+            <div class="filter-bar">
+                <div class="filter-group">
+                    <button class="filter-btn active" data-category="all">
+                        <i class="fas fa-th"></i> Tất Cả
+                    </button>
+                    <button class="filter-btn" data-category="chao-ga">
+                        <i class="fas fa-drumstick-bite"></i> Cháo Gà
+                    </button>
+                    <button class="filter-btn" data-category="chao-bo">
+                        <i class="fas fa-cow"></i> Cháo Bò
+                    </button>
+                    <button class="filter-btn" data-category="chao-ca">
+                        <i class="fas fa-fish"></i> Cháo Cá
+                    </button>
+                    <button class="filter-btn" data-category="chao-tom">
+                        <i class="fas fa-shrimp"></i> Cháo Tôm
+                    </button>
+                    <button class="filter-btn" data-category="chao-chay">
+                        <i class="fas fa-leaf"></i> Cháo Chay
+                    </button>
+                </div>
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Tìm kiếm món ăn...">
+                    <i class="fas fa-search"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Grid -->
+    <section class="products-section">
+        <div class="container">
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be loaded here by JavaScript -->
+            </div>
+            <div id="noResults" class="no-results" style="display: none;">
+                <i class="fas fa-search"></i>
+                <p>Không tìm thấy món ăn phù hợp</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Detail Modal -->
+    <div class="modal" id="productModal">
+        <div class="modal-content modal-large">
+            <span class="close">&times;</span>
+            <div class="product-detail" id="productDetail">
+                <!-- Product details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div class="modal" id="cartModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Giỏ Hàng</h2>
+            <div id="cartItems">
+                <!-- Cart items will be loaded here -->
+            </div>
+            <div class="cart-total">
+                <h3>Tổng cộng: <span id="cartTotal">0đ</span></h3>
+                <button class="btn-primary full-width" onclick="checkout()">Thanh Toán</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Đăng Nhập</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Mật khẩu</label>
+                    <input type="password" name="password" required>
+                </div>
+                <button type="submit" class="btn-primary full-width">Đăng Nhập</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Đăng Ký</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label>Họ và tên</label>
+                    <input type="text" name="fullname" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Số điện thoại</label>
+                    <input type="tel" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label>Mật khẩu</label>
+                    <input type="password" name="password" required>
+                </div>
+                <button type="submit" class="btn-primary full-width">Đăng Ký</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>Cháo Baby Cutie</h4>
+                    <p>Dinh dưỡng tốt nhất cho bé yêu của bạn</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Liên Kết</h4>
+                    <a href="index.html">Trang Chủ</a>
+                    <a href="gioi-thieu.html">Giới Thiệu</a>
+                    <a href="thuc-don.html">Thực Đơn</a>
+                    <a href="tin-tuc.html">Tin Tức</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Liên Hệ</h4>
+                    <p><i class="fas fa-phone"></i> 0123 456 789</p>
+                    <p><i class="fas fa-envelope"></i> info@babycutie.vn</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Hà Nội, Việt Nam</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/thuc-don.js"></script>
+</body>
+</html>

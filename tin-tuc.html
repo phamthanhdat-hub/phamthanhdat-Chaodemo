@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tin Tức - Cháo Baby Cutie</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/tin-tuc.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-baby"></i>
+                    <span>Cháo Baby Cutie</span>
+                </div>
+                <nav class="nav">
+                    <a href="index.html">Trang Chủ</a>
+                    <a href="gioi-thieu.html">Giới Thiệu</a>
+                    <a href="thuc-don.html">Thực Đơn</a>
+                    <a href="tin-tuc.html" class="active">Tin Tức</a>
+                    <a href="lien-he.html">Liên Hệ</a>
+                </nav>
+                <div class="header-actions">
+                    <button class="btn-icon" id="cartBtn">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </button>
+                    <button class="btn-login" id="loginBtn">Đăng Nhập</button>
+                    <button class="btn-register" id="registerBtn">Đăng Ký</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Title -->
+    <section class="page-title">
+        <div class="container">
+            <h1>Tin Tức & Kiến Thức</h1>
+            <p>Cập nhật kiến thức nuôi dạy con hữu ích</p>
+        </div>
+    </section>
+
+    <!-- Featured News -->
+    <section class="featured-news">
+        <div class="container">
+            <div class="featured-card" id="featuredNews">
+                <!-- Featured news will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- News Filter -->
+    <section class="news-filter">
+        <div class="container">
+            <div class="filter-tabs">
+                <button class="tab-btn active" data-category="all">Tất Cả</button>
+                <button class="tab-btn" data-category="dinh-duong">Dinh Dưỡng</button>
+                <button class="tab-btn" data-category="cham-soc">Chăm Sóc</button>
+                <button class="tab-btn" data-category="thuc-don">Thực Đơn</button>
+                <button class="tab-btn" data-category="meo-hay">Mẹo Hay</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Grid -->
+    <section class="news-section">
+        <div class="container">
+            <div class="news-grid" id="newsGrid">
+                <!-- News articles will be loaded here -->
+            </div>
+            
+            <!-- Pagination -->
+            <div class="pagination" id="pagination">
+                <!-- Pagination will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- News Detail Modal -->
+    <div class="modal" id="newsModal">
+        <div class="modal-content modal-large">
+            <span class="close">&times;</span>
+            <div class="news-detail" id="newsDetail">
+                <!-- News detail will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div class="modal" id="cartModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Giỏ Hàng</h2>
+            <div id="cartItems"></div>
+            <div class="cart-total">
+                <h3>Tổng cộng: <span id="cartTotal">0đ</span></h3>
+                <button class="btn-primary full-width">Thanh Toán</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Đăng Nhập</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Mật khẩu</label>
+                    <input type="password" name="password" required>
+                </div>
+                <button type="submit" class="btn-primary full-width">Đăng Nhập</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Đăng Ký</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label>Họ và tên</label>
+                    <input type="text" name="fullname" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Số điện thoại</label>
+                    <input type="tel" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label>Mật khẩu</label>
+                    <input type="password" name="password" required>
+                </div>
+                <button type="submit" class="btn-primary full-width">Đăng Ký</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>Cháo Baby Cutie</h4>
+                    <p>Dinh dưỡng tốt nhất cho bé yêu của bạn</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Liên Kết</h4>
+                    <a href="index.html">Trang Chủ</a>
+                    <a href="gioi-thieu.html">Giới Thiệu</a>
+                    <a href="thuc-don.html">Thực Đơn</a>
+                    <a href="tin-tuc.html">Tin Tức</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Liên Hệ</h4>
+                    <p><i class="fas fa-phone"></i> 0123 456 789</p>
+                    <p><i class="fas fa-envelope"></i> info@babycutie.vn</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Hà Nội, Việt Nam</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/tin-tuc.js"></script>
+</body>
+</html>
