@@ -1,329 +1,115 @@
-// Products Data
-let allProducts = [];
-let filteredProducts = [];
-let currentCategory = 'all';
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. DỮ LIỆU GIẢ LẬP (Mô phỏng dữ liệu từ CSDL)
+    const mockData = [
+        { id: 1, name: 'Cháo Gà', description: 'Các loại cháo gà dinh dưỡng' },
+        { id: 2, name: 'Cháo Bò', description: 'Cháo bò cung cấp nhiều protein' },
+        { id: 3, name: 'Cháo Cá', description: 'Cháo cá bổ sung omega 3' },
+        { id: 5, name: 'Cháo Chay', description: 'Cháo chay thanh đạm cho bé' }
+    ];
 
-// Sample Products Data
-const sampleProducts = [
-    {
-        id: 1,
-        name: 'Cháo Gà Rau Củ',
-        description: 'Cháo gà thơm ngon với rau củ tươi, cà rốt, bí đỏ',
-        price: 35000,
-        category: 'chao-ga',
-        image: 'product1.jpg',
-        nutrition: { protein: '12g', carb: '25g', fat: '5g', fiber: '3g' }
-    },
-    {
-        id: 2,
-        name: 'Cháo Bò Bí Đỏ',
-        description: 'Cháo bò bổ dưỡng kết hợp bí đỏ giàu vitamin A',
-        price: 40000,
-        category: 'chao-bo',
-        image: 'product2.jpg',
-        nutrition: { protein: '15g', carb: '28g', fat: '6g', fiber: '4g' }
-    },
-    {
-        id: 3,
-        name: 'Cháo Cá Hồi',
-        description: 'Cháo cá hồi giàu omega 3, DHA tốt cho não bộ',
-        price: 45000,
-        category: 'chao-ca',
-        image: 'product3.jpg',
-        nutrition: { protein: '18g', carb: '22g', fat: '8g', fiber: '2g' }
-    },
-    {
-        id: 4,
-        name: 'Cháo Tôm Rau Ngót',
-        description: 'Cháo tôm với rau ngót bổ dưỡng, giàu canxi',
-        price: 38000,
-        category: 'chao-tom',
-        image: 'product4.jpg',
-        nutrition: { protein: '14g', carb: '24g', fat: '5g', fiber: '3g' }
-    },
-    {
-        id: 5,
-        name: 'Cháo Gà Nấm Hương',
-        description: 'Cháo gà kết hợp nấm hương thơm ngon',
-        price: 42000,
-        category: 'chao-ga',
-        image: 'product5.jpg',
-        nutrition: { protein: '13g', carb: '26g', fat: '5g', fiber: '4g' }
-    },
-    {
-        id: 6,
-        name: 'Cháo Bò Cà Rốt',
-        description: 'Cháo bò với cà rốt giàu beta-carotene',
-        price: 40000,
-        category: 'chao-bo',
-        image: 'product6.jpg',
-        nutrition: { protein: '15g', carb: '27g', fat: '6g', fiber: '3g' }
-    },
-    {
-        id: 7,
-        name: 'Cháo Cá Diêu Hồng',
-        description: 'Cháo cá diêu hồng thơm ngon, giàu protein',
-        price: 38000,
-        category: 'chao-ca',
-        image: 'product7.jpg',
-        nutrition: { protein: '16g', carb: '23g', fat: '7g', fiber: '2g' }
-    },
-    {
-        id: 8,
-        name: 'Cháo Tôm Bí Xanh',
-        description: 'Cháo tôm với bí xanh mát, bổ dưỡng',
-        price: 40000,
-        category: 'chao-tom',
-        image: 'product8.jpg',
-        nutrition: { protein: '14g', carb: '25g', fat: '5g', fiber: '4g' }
-    },
-    {
-        id: 9,
-        name: 'Cháo Chay Đậu Hũ',
-        description: 'Cháo chay thanh đạm với đậu hũ, rau củ',
-        price: 32000,
-        category: 'chao-chay',
-        image: 'product9.jpg',
-        nutrition: { protein: '10g', carb: '30g', fat: '4g', fiber: '5g' }
-    },
-    {
-        id: 10,
-        name: 'Cháo Gà Yến Mạch',
-        description: 'Cháo gà kết hợp yến mạch giàu chất xơ',
-        price: 45000,
-        category: 'chao-ga',
-        image: 'product10.jpg',
-        nutrition: { protein: '13g', carb: '28g', fat: '5g', fiber: '6g' }
-    }
-];
+    const mockProducts = [
+        { id: 1, name: 'Cháo Gà Rau Củ', price: 35000, category_id: 1, protein: 15, carb: 20, fat: 5 },
+        { id: 2, name: 'Cháo Gà Bí Đỏ', price: 37000, category_id: 1, protein: 18, carb: 22, fat: 6 },
+        { id: 3, name: 'Cháo Bò Hầm', price: 42000, category_id: 2, protein: 25, carb: 30, fat: 8 },
+        { id: 4, name: 'Cháo Cá Hồi', price: 45000, category_id: 3, protein: 20, carb: 18, fat: 10 },
+        { id: 6, name: 'Cháo Chay Hạt Sen', price: 30000, category_id: 5, protein: 10, carb: 22, fat: 2 }
+    ];
 
-// Initialize
-document.addEventListener('DOMContentLoaded', function() {
-    loadProducts();
-    initFilters();
-    initSearch();
-    initModals();
-});
+    const productListDiv = document.getElementById('product-list');
 
-// Load Products
-async function loadProducts() {
-    try {
-        // Try to load from API
-        const response = await fetch(`${API_URL}/products`);
-        const result = await response.json();
-        
-        if (result.success) {
-            allProducts = result.data;
-        }
-    } catch (error) {
-        console.log('Loading sample products...');
-        allProducts = sampleProducts;
-    }
-    
-    filteredProducts = [...allProducts];
-    renderProducts();
-}
+    // 2. HÀM HIỂN THỊ SẢN PHẨM
+    function renderProducts() {
+        productListDiv.innerHTML = ''; // Xóa nội dung "Đang tải"
 
-// Render Products
-function renderProducts() {
-    const grid = document.getElementById('productsGrid');
-    const noResults = document.getElementById('noResults');
-    
-    if (filteredProducts.length === 0) {
-        grid.innerHTML = '';
-        noResults.style.display = 'block';
-        return;
-    }
-    
-    noResults.style.display = 'none';
-    
-    grid.innerHTML = filteredProducts.map(product => `
-        <div class="product-card" onclick="showProductDetail(${product.id})">
-            <div class="product-image">
-                <i class="fas fa-bowl-rice"></i>
-                ${product.badge ? `<span class="product-badge">${product.badge}</span>` : ''}
-            </div>
-            <div class="product-info">
-                <span class="product-category">${getCategoryName(product.category)}</span>
-                <h3 class="product-name">${product.name}</h3>
-                <p class="product-desc">${product.description}</p>
-                <div class="product-nutrition">
-                    <div class="nutrition-item">
-                        <i class="fas fa-fire"></i>
-                        <span>${product.nutrition?.protein || '10g'} Protein</span>
+        mockData.forEach(category => {
+            const productsInCategory = mockProducts.filter(p => p.category_id === category.id);
+            
+            // Nếu không có sản phẩm trong danh mục này, bỏ qua
+            if (productsInCategory.length === 0) return;
+
+            // Tạo phần tử cho Danh mục
+            const categorySection = document.createElement('div');
+            categorySection.className = 'category-section';
+            
+            const categoryHeader = document.createElement('h3');
+            categoryHeader.textContent = category.name;
+            categorySection.appendChild(categoryHeader);
+
+            const productsGrid = document.createElement('div');
+            productsGrid.className = 'products-grid';
+
+            // Tạo các thẻ Sản phẩm
+            productsInCategory.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                
+                // Hàm định dạng tiền tệ Việt Nam (ví dụ: 35,000 đ)
+                const formatVND = (price) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price);
+
+                productCard.innerHTML = `
+                    <h4>${product.name}</h4>
+                    <p class="product-price">${formatVND(product.price)}</p>
+                    <div class="product-info">
+                        <p>Protein: ${product.protein}g | Carb: ${product.carb}g | Fat: ${product.fat}g</p>
                     </div>
-                    <div class="nutrition-item">
-                        <i class="fas fa-leaf"></i>
-                        <span>${product.nutrition?.fiber || '3g'} Chất xơ</span>
-                    </div>
-                </div>
-                <div class="product-footer">
-                    <span class="product-price">${formatPrice(product.price)}</span>
-                    <button class="btn-add-cart" onclick="event.stopPropagation(); addToCart(${product.id})">
-                        <i class="fas fa-cart-plus"></i> Thêm
+                    <button class="btn add-to-cart" data-id="${product.id}" data-name="${product.name}">
+                        Thêm vào Giỏ
                     </button>
-                </div>
-            </div>
-        </div>
-    `).join('');
-}
+                `;
+                productsGrid.appendChild(productCard);
+            });
 
-// Show Product Detail
-function showProductDetail(productId) {
-    const product = allProducts.find(p => p.id === productId);
-    if (!product) return;
-    
-    const modal = document.getElementById('productModal');
-    const detail = document.getElementById('productDetail');
-    
-    detail.innerHTML = `
-        <div class="detail-image">
-            <i class="fas fa-bowl-rice"></i>
-        </div>
-        <div class="detail-info">
-            <span class="product-category">${getCategoryName(product.category)}</span>
-            <h2>${product.name}</h2>
-            <p class="product-desc">${product.description}</p>
-            
-            <div class="detail-nutrition">
-                <h4><i class="fas fa-clipboard-list"></i> Thành Phần Dinh Dưỡng</h4>
-                <div class="nutrition-list">
-                    <div class="nutrition-item">
-                        <i class="fas fa-fire"></i> Protein: ${product.nutrition?.protein || '10g'}
-                    </div>
-                    <div class="nutrition-item">
-                        <i class="fas fa-bread-slice"></i> Carb: ${product.nutrition?.carb || '25g'}
-                    </div>
-                    <div class="nutrition-item">
-                        <i class="fas fa-droplet"></i> Chất béo: ${product.nutrition?.fat || '5g'}
-                    </div>
-                    <div class="nutrition-item">
-                        <i class="fas fa-leaf"></i> Chất xơ: ${product.nutrition?.fiber || '3g'}
-                    </div>
-                </div>
-            </div>
-            
-            <div class="detail-price">${formatPrice(product.price)}</div>
-            
-            <div class="quantity-selector">
-                <button onclick="changeQuantity(-1)"><i class="fas fa-minus"></i></button>
-                <span id="quantity">1</span>
-                <button onclick="changeQuantity(1)"><i class="fas fa-plus"></i></button>
-            </div>
-            
-            <button class="btn-primary full-width" onclick="addToCartWithQuantity(${product.id})">
-                <i class="fas fa-cart-plus"></i> Thêm Vào Giỏ Hàng
-            </button>
-        </div>
-    `;
-    
-    modal.style.display = 'block';
-}
-
-// Change Quantity
-let modalQuantity = 1;
-
-function changeQuantity(change) {
-    modalQuantity = Math.max(1, modalQuantity + change);
-    document.getElementById('quantity').textContent = modalQuantity;
-}
-
-function addToCartWithQuantity(productId) {
-    for (let i = 0; i < modalQuantity; i++) {
-        addToCart(productId);
-    }
-    document.getElementById('productModal').style.display = 'none';
-    modalQuantity = 1;
-}
-
-// Filters
-function initFilters() {
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            filterBtns.forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-            
-            currentCategory = this.getAttribute('data-category');
-            filterProducts();
+            categorySection.appendChild(productsGrid);
+            productListDiv.appendChild(categorySection);
         });
-    });
-}
-
-function filterProducts() {
-    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-    
-    filteredProducts = allProducts.filter(product => {
-        const matchCategory = currentCategory === 'all' || product.category === currentCategory;
-        const matchSearch = product.name.toLowerCase().includes(searchTerm) || 
-                          product.description.toLowerCase().includes(searchTerm);
-        
-        return matchCategory && matchSearch;
-    });
-    
-    renderProducts();
-}
-
-// Search
-function initSearch() {
-    const searchInput = document.getElementById('searchInput');
-    
-    searchInput.addEventListener('input', function() {
-        filterProducts();
-    });
-}
-
-// Utilities
-function getCategoryName(category) {
-    const categories = {
-        'chao-ga': 'Cháo Gà',
-        'chao-bo': 'Cháo Bò',
-        'chao-ca': 'Cháo Cá',
-        'chao-tom': 'Cháo Tôm',
-        'chao-chay': 'Cháo Chay'
-    };
-    return categories[category] || 'Cháo';
-}
-
-function formatPrice(price) {
-    return new Intl.NumberFormat('vi-VN', {
-        style: 'currency',
-        currency: 'VND'
-    }).format(price);
-}
-
-// Checkout
-function checkout() {
-    if (cart.length === 0) {
-        showNotification('Giỏ hàng trống!', 'error');
-        return;
     }
-    
-    if (!currentUser) {
-        document.getElementById('cartModal').style.display = 'none';
-        document.getElementById('loginModal').style.display = 'block';
-        showNotification('Vui lòng đăng nhập để thanh toán', 'info');
-        return;
-    }
-    
-    showNotification('Tính năng đặt hàng đang được phát triển!', 'info');
-}
 
-// Modal Close
-function initModals() {
-    const modals = document.querySelectorAll('.modal');
-    const closeButtons = document.querySelectorAll('.close');
-    
-    closeButtons.forEach(btn => {
-        btn.onclick = function() {
-            this.closest('.modal').style.display = 'none';
-        };
-    });
-    
-    window.onclick = function(event) {
-        if (event.target.classList.contains('modal')) {
-            event.target.style.display = 'none';
+    // 3. LOGIC GIỎ HÀNG ĐƠN GIẢN
+    let cart = [];
+    const cartCountElement = document.getElementById('cart-count');
+
+    function updateCartCount() {
+        cartCountElement.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+    }
+
+    // Lắng nghe sự kiện thêm vào giỏ hàng
+    productListDiv.addEventListener('click', (event) => {
+        if (event.target.classList.contains('add-to-cart')) {
+            const productId = parseInt(event.target.dataset.id);
+            const productName = event.target.dataset.name;
+
+            const existingItem = cart.find(item => item.id === productId);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ id: productId, name: productName, quantity: 1 });
+            }
+            
+            updateCartCount();
+            console.log(`Đã thêm ${productName} vào giỏ hàng.`, cart);
+            alert(`Đã thêm 1 x ${productName} vào giỏ hàng!`);
         }
-    };
-}
+    });
+
+    // 4. XỬ LÝ FORM LIÊN HỆ
+    const contactForm = document.getElementById('contact-form');
+    contactForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        
+        // Mô phỏng gửi dữ liệu (thay vì gọi API/backend)
+        console.log('Form liên hệ đã được gửi.');
+        
+        // Hiển thị thông báo thành công
+        document.getElementById('contact-message').style.display = 'block';
+        
+        // Reset form sau 3 giây
+        setTimeout(() => {
+            contactForm.reset();
+            document.getElementById('contact-message').style.display = 'none';
+        }, 3000);
+    });
+
+    // Bắt đầu hiển thị sản phẩm khi DOM tải xong
+    renderProducts();
+});
