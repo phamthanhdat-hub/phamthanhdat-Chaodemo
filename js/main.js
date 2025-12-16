@@ -4,6 +4,18 @@ const API_URL = "http://127.0.0.1:5000/api";
 let products = [];
 let cart = [];
 
+// ------------------ Sample fallback ------------------
+function loadSampleProducts() {
+    products = [
+        { id: 1, name: "Cháo Gà Rau Xanh", price: 45000, description: "Cháo gà tươi kết hợp rau xanh, cà rốt - tốt cho hệ tiêu hóa bé", image: "images/a2.jpg" },
+        { id: 2, name: "Cháo Thịt Bò Khoai Tây", price: 55000, description: "Cháo thịt bò mềm, khoai tây bổ dưỡng - giàu protein cho bé", image: "images/bo.jpg" },
+        { id: 3, name: "Cháo Cá Hồi Bông Cải", price: 65000, description: "Cá hồi tươi, bông cải xoăn - omega-3 tốt cho não bé", image: "images/ca.jpg" },
+        { id: 4, name: "Cháo Gà Nấm Rơm", price: 50000, description: "Gà thơm, nấm rơm bổ dưỡng - lành tính cho dạ dày", image: "images/tom.jpg" },
+        { id: 5, name: "Cháo Tôm Bí Đỏ", price: 60000, description: "Tôm sạch, bí đỏ giàu vitamin A - tốt cho mắt bé", image: "images/ga.jpg" },
+        { id: 6, name: "Cháo Lợn Xương Dùi", price: 48000, description: "Lợn nạc, xương dùi nấu lâu - canxi tốt cho xương bé", image: "images/luon.jpg" }
+    ];
+}
+
 // ===================== LOAD PRODUCTS =====================
 async function loadProducts() {
     try {
@@ -58,7 +70,10 @@ function renderProducts() {
 // ===================== CART FUNCTIONS =====================
 function addToCart(id) {
     let product = products.find(p => p.id === id);
-    if (!product) return;
+    if (!product) {
+        showCartNotification && showCartNotification('Sản phẩm không tìm thấy');
+        return;
+    }
 
     const existing = cart.find(p => p.id === id);
     if (existing) {
@@ -69,6 +84,9 @@ function addToCart(id) {
 
     updateCartCount();
     renderCart();
+    // UX: animate flyer from last clicked element (if available)
+    try { animateToCart(product); } catch(e){ /* ignore */ }
+    showCartNotification(`${product.name} đã được thêm vào giỏ.`);
 }
 
 function updateCartCount() {
