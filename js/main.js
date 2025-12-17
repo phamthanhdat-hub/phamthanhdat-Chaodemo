@@ -86,6 +86,14 @@ function addToCart(id) {
     renderCart();
     // UX: animate flyer from last clicked element (if available)
     try { animateToCart(product); } catch(e){ /* ignore */ }
+    // Shake the cart icon
+    try {
+        const cartBtn = document.getElementById('cartBtn');
+        if (cartBtn) {
+            cartBtn.style.animation = 'none';
+            setTimeout(() => cartBtn.style.animation = 'cartShake 0.5s', 10);
+        }
+    } catch(e) {}
     showCartNotification(`${product.name} đã được thêm vào giỏ.`);
 }
 
@@ -103,16 +111,26 @@ function renderCart() {
     if (!cartItems || !cartTotal) return;
 
     if (cart.length === 0) {
-        cartItems.innerHTML = "<p>Giỏ hàng trống!</p>";
+        cartItems.innerHTML = "<p style='text-align:center; color:#999; padding:20px;'>Giỏ hàng trống!</p>";
         cartTotal.textContent = "0đ";
         return;
     }
 
     cartItems.innerHTML = cart.map((item, index) => `
-        <div class="cart-item">
-            <span>${item.name} x ${item.quantity}</span>
-            <span>${formatPrice(item.price * item.quantity)}</span>
-            <button onclick="removeItem(${index})" class="btn-remove">X</button>
+        <div class="cart-item" style="display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px; background:#f9f9f9; border-radius:8px; margin-bottom:8px; border:1px solid #eee;">
+            <div style="flex:1;">
+                <div style="font-weight:600; font-size:1rem;">${item.name}</div>
+                <div style="color:#777; font-size:0.9rem; margin-top:4px;">Giá: ${formatPrice(item.price)}</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px;">
+                <button onclick="decreaseQuantity(${index})" style="width:32px; height:32px; border-radius:6px; border:none; background:#ff6b9d; color:#fff; font-weight:700; cursor:pointer; font-size:1.2rem;">−</button>
+                <div style="min-width:30px; text-align:center; font-weight:bold; color:var(--primary);">${item.quantity}</div>
+                <button onclick="increaseQuantity(${index})" style="width:32px; height:32px; border-radius:6px; border:none; background:#667eea; color:#fff; font-weight:700; cursor:pointer; font-size:1.2rem;">+</button>
+            </div>
+            <div style="text-align:right; min-width:100px;">
+                <div style="font-weight:700; color:var(--primary); font-size:1.1rem;">${formatPrice(item.price * item.quantity)}</div>
+                <button onclick="removeItem(${index})" style="margin-top:6px; background:#ff4444; color:#fff; border:none; padding:4px 8px; border-radius:4px; font-size:0.85rem; cursor:pointer;">Xóa</button>
+            </div>
         </div>
     `).join("");
 
@@ -120,10 +138,33 @@ function renderCart() {
     cartTotal.textContent = formatPrice(total);
 }
 
+function increaseQuantity(index) {
+    if (cart[index]) {
+        cart[index].quantity++;
+        updateCartCount();
+        renderCart();
+        showCartNotification && showCartNotification(`Tăng số lượng: ${cart[index].name}`);
+    }
+}
+
+function decreaseQuantity(index) {
+    if (cart[index]) {
+        if (cart[index].quantity > 1) {
+            cart[index].quantity--;
+        } else {
+            cart.splice(index, 1);
+        }
+        updateCartCount();
+        renderCart();
+        showCartNotification && showCartNotification(`Cập nhật giỏ hàng`);
+    }
+}
+
 function removeItem(index) {
     cart.splice(index,1);
     updateCartCount();
     renderCart();
+    showCartNotification && showCartNotification(`Đã xóa mục khỏi giỏ hàng`);
 }
 
 // ===================== FORMAT PRICE =====================
@@ -143,10 +184,10 @@ function initModals() {
 
     const closeButtons = document.querySelectorAll(".close");
 
-    if (loginBtn && loginModal) loginBtn.onclick = () => loginModal.style.display="block";
-    if (registerBtn && registerModal) registerBtn.onclick = () => registerModal.style.display="block";
+    if (loginBtn && loginModal) loginBtn.onclick = () => loginModal.style.display="flex";
+    if (registerBtn && registerModal) registerBtn.onclick = () => registerModal.style.display="flex";
     if (cartBtn && cartModal) cartBtn.onclick = () => {
-        cartModal.style.display="block";
+        cartModal.style.display="flex";
         renderCart();
     };
 

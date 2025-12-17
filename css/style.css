@@ -159,32 +159,98 @@ body {
 .btn-icon {
     background: var(--accent);
     border: none;
-    width: 45px;
-    height: 45px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     cursor: pointer;
     position: relative;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
+    font-size: 1.3rem;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(255, 107, 157, 0.15);
 }
 
 .btn-icon:hover {
     background: var(--secondary);
-    transform: scale(1.1);
+    transform: scale(1.12) translateY(-2px);
+    box-shadow: 0 6px 18px rgba(255, 107, 157, 0.25);
+}
+
+.btn-icon:active {
+    transform: scale(0.98);
 }
 
 .cart-count {
     position: absolute;
-    top: -5px;
-    right: -5px;
+    top: -8px;
+    right: -8px;
     background: var(--primary);
     color: white;
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
-    font-size: 0.75rem;
+    font-size: 0.8rem;
+    font-weight: 700;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 2px 8px rgba(255, 107, 157, 0.3);
+    animation: badgePulse 2s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}
+
+@keyframes cartShake {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-5deg); }
+    75% { transform: rotate(5deg); }
+}
+
+/* ===================== MODAL ===================== */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    padding: 25px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    position: relative;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #999;
+    transition: color 0.3s;
+}
+
+.close:hover {
+    color: #333;
 }
 
 /* Buttons */
